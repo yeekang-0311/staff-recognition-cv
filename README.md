@@ -29,3 +29,11 @@ The detection of tag outside of the torso bounding box coordination is considere
 Implement deep sort for object tracking and counting
 Train staff tag detection model using output from torso detection model 
 
+# To run
+ * Run main.ipynb file
+ * Get weights of tagmodel, yolov7 and yolov7-pose
+ * Run detecttag.py file and changing source file
+
+```
+!python detecttag.py --source ./samplepic.png --classes 0 --conf 0.25
+```
