@@ -88,6 +88,7 @@ def detectTag(torso_model, tag_model, oriPic, device, half):
             isTag = True
             label=f"Tag {conf:.2f}"
             plot_one_box(xyxy, oriPic, label=label, color=22, line_thickness=1)
+
   return isTag
 
 def detect(save_img=False):
@@ -211,6 +212,11 @@ def detect(save_img=False):
                     cropobj = im0[int(xyxy[1]):int(xyxy[3]),int(xyxy[0]):int(xyxy[2])]
                     isStaff = detectTag(torso_model, tag_model, cropobj, device, half)
                     print(f"Is staff or not bro: {isStaff}")
+                    # write coor
+                    centerX = ((xyxy[0] + xyxy[2]) / 2).round()
+                    centerY = ((xyxy[1] + xyxy[3]) / 2).round()
+                    coorlabel = f"{centerX}, {centerY}"
+                    cv2.putText(im0, coorlabel, (int(xyxy[0]), int(xyxy[1]) + 10), 0, 1 / 3, [225, 255, 255], thickness=1, lineType=cv2.LINE_AA)
 
                     if save_img or view_img:  # Add bbox to image
                         label = f'{names[int(cls)]} {conf:.2f}'
